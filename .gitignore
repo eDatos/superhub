@@ -2,3 +2,6 @@
 config.yml
 .DS_Store
 .env
+sandbox.ipynb
+.ipynb_checkpoints
+/data

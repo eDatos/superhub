@@ -1,2 +1,6 @@
 pyyaml
 prettyconf
+selenium==3.141.0
+requests
+pandas
+lxml
