@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 import requests
+import user_agent
 
 from .base import BaseScraper
 
@@ -13,9 +14,12 @@ class Scraper(BaseScraper):
 
     def scrap(self):
         target_field = self.config['target_field']['name']
-        target_postal_codes = self.config['target_field']['values']
+        target_postal_codes = [str(tpc) for tpc in self.config['target_field']['values']]
 
-        response = requests.get(self.config['url'])
+        ua = user_agent.generate_user_agent()
+        headers = {'User-Agent': ua}
+        response = requests.get(self.config['url'], headers=headers)
+        # TODO: response.status_code
         df = pd.read_xml(response.text)
         df = df[df[target_field].str[:2].isin(target_postal_codes)]
         df.to_csv(self.df_output_path, index=False)
