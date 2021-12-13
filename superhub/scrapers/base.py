@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import requests
+import user_agent
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
@@ -40,3 +42,12 @@ class BaseScraper:
         return webdriver.Firefox(
             options=options, firefox_profile=profile, log_path=os.devnull
         )
+
+    def make_request(self, url, method='get', include_user_agent=True):
+        if include_user_agent:
+            ua = user_agent.generate_user_agent()
+            headers = {'User-Agent': ua}
+        else:
+            headers = {}
+        f = getattr(requests, method)
+        return f(url, headers=headers)

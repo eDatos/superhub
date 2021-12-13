@@ -1,5 +1,6 @@
-import settings
+import sys
+
 from superhub import dispatcher
 
 disp = dispatcher.Dispatcher()
-disp.scrap_all(filter=settings.DEBUG_CHAINS)
+disp.scrap_all(filter=[sys.argv[1]])

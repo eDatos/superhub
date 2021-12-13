@@ -4,3 +4,4 @@ selenium==3.141.0
 requests
 pandas
 lxml
+beautifulsoup4
