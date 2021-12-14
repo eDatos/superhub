@@ -1,13 +1,10 @@
-import time
 from pathlib import Path
 
 import pandas as pd
-import requests
-import user_agent
 from logzero import logger
 
 import settings
-from superhub import utils
+from superhub import network, utils
 
 
 class BaseScraper:
@@ -38,23 +35,9 @@ class BaseScraper:
         raise NotImplementedError()
 
     def make_request(self, url, method='get', include_user_agent=True):
-        logger.debug(f'Requesting {url}')
-        if req_delay := self.config.get('req_delay'):
-            logger.debug(f'Delay of {req_delay} seconds')
-            time.sleep(req_delay)
-        if include_user_agent:
-            ua = user_agent.generate_user_agent()
-            headers = {'User-Agent': ua}
-        else:
-            headers = {}
-        f = getattr(requests, method)
-        try:
-            response = f(url, headers=headers, timeout=settings.REQUESTS_TIMEOUT)
-        except requests.exceptions.ReadTimeout as err:
-            logger.error(err)
-        else:
-            logger.debug(f'Response status code: {response.status_code}')
-            return response
+        return network.make_request(
+            url, method=method, include_user_agent=include_user_agent
+        )
 
     def save_dataframe(self, establishments: list[dict]):
         logger.info(f'Saving dataframe to {self.df_output_path}')

@@ -14,5 +14,6 @@ LOGFILE = config('LOGFILE', default=PROJECT_DIR / (PROJECT_NAME + '.log'), cast=
 LOGFILE_SIZE = config('LOGFILE_SIZE', cast=float, default=1e6)
 LOGFILE_BACKUP_COUNT = config('LOGFILE_BACKUP_COUNT', cast=int, default=3)
 
-# seconds
-REQUESTS_TIMEOUT = config('REQUESTS_TIMEOUT', default=5, cast=int)
+REQUESTS_TIMEOUT = config('REQUESTS_TIMEOUT', default=5, cast=int)  # seconds
+REQUESTS_DELAY = config('REQUESTS_DELAY', default=3, cast=int)  # seconds
+REQUESTS_RETRIES = config('REQUESTS_RETRIES', default=3, cast=int)
