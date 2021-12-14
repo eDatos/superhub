@@ -1,10 +1,9 @@
 from pathlib import Path
 
-import pandas as pd
 from logzero import logger
 
 import settings
-from superhub import network, utils
+from superhub import network, storage, utils
 
 
 class BaseScraper:
@@ -40,10 +39,4 @@ class BaseScraper:
         )
 
     def save_dataframe(self, establishments):
-        logger.info(f'Saving dataframe to {self.df_output_path}')
-        if isinstance(establishments, pd.DataFrame):
-            df = establishments
-        else:
-            # establishments expected to be list[dict]
-            df = pd.DataFrame(establishments)
-        df.to_csv(self.df_output_path, index=False)
+        storage.save_dataframe(establishments, self.df_output_path)
