@@ -7,6 +7,10 @@ from logzero import logger
 import settings
 
 
+def get_user_agent_header():
+    return {'User-Agent': user_agent.generate_user_agent()}
+
+
 def make_request(
     url,
     method='get',
@@ -17,16 +21,11 @@ def make_request(
 ):
     logger.debug(f'Requesting {url}')
 
-    if include_user_agent:
-        ua = user_agent.generate_user_agent()
-        headers = {'User-Agent': ua}
-    else:
-        headers = {}
-
     req = getattr(requests, method)
-    retry = 1
-    while retry <= num_retries:
+    retry = 0
+    while True:
         try:
+            headers = get_user_agent_header() if include_user_agent else {}
             response = req(url, headers=headers, timeout=timeout)
         except requests.exceptions.ReadTimeout as err:
             logger.error(err)
@@ -34,6 +33,9 @@ def make_request(
             logger.debug(f'Response status code: {response.status_code}')
             if response.status_code // 100 == 2:  # 2XX
                 return response
+        logger.debug(f'Request delay: {req_delay} seconds')
         time.sleep(req_delay)
-        logger.debug(f'Network retry {retry}')
+        if retry >= num_retries:
+            break
         retry += 1
+        logger.debug(f'Network retry {retry}')

@@ -39,7 +39,11 @@ class BaseScraper:
             url, method=method, include_user_agent=include_user_agent
         )
 
-    def save_dataframe(self, establishments: list[dict]):
+    def save_dataframe(self, establishments):
         logger.info(f'Saving dataframe to {self.df_output_path}')
-        df = pd.DataFrame(establishments)
+        if isinstance(establishments, pd.DataFrame):
+            df = establishments
+        else:
+            # establishments expected to be list[dict]
+            df = pd.DataFrame(establishments)
         df.to_csv(self.df_output_path, index=False)
