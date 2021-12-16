@@ -6,3 +6,4 @@ pandas
 lxml
 beautifulsoup4
 logzero
+typer
