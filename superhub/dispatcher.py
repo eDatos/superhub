@@ -5,6 +5,7 @@ import yaml
 from logzero import logger
 
 import settings
+from superhub import notification
 
 
 class Dispatcher:
@@ -26,3 +27,6 @@ class Dispatcher:
         output_filepath = settings.ZIPDATA_FILEPATH
         logger.info(f'Compressing output data -> {output_filepath}')
         return shutil.make_archive(output_filepath.stem, 'zip', settings.DF_OUTPUT_FOLDER)
+
+    def notify(self):
+        notification.notify()

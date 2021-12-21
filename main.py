@@ -18,12 +18,21 @@ def run(
     compress: bool = typer.Option(
         False, '--compress', '-x', show_default=False, help='Compress output data files.'
     ),
+    notify: bool = typer.Option(
+        False,
+        '--notify',
+        '-n',
+        show_default=False,
+        help='Notify compressed output data files.',
+    ),
 ):
     logger.setLevel(logzero.DEBUG if verbose else logzero.INFO)
     disp = dispatcher.Dispatcher()
     disp.scrap_all(filter=trades)
-    if compress:
+    if compress or notify:
         disp.compress()
+    if notify:
+        disp.notify()
 
 
 if __name__ == "__main__":
