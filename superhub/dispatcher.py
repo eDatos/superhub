@@ -1,11 +1,9 @@
-import shutil
 from importlib import import_module
 
 import yaml
-from logzero import logger
 
 import settings
-from superhub import notification
+from superhub import notification, storage
 
 
 class Dispatcher:
@@ -24,9 +22,7 @@ class Dispatcher:
                 self.scrap(slug)
 
     def compress(self):
-        output_filepath = settings.ZIPDATA_FILEPATH
-        logger.info(f'Compressing output data -> {output_filepath}')
-        return shutil.make_archive(output_filepath.stem, 'zip', settings.DF_OUTPUT_FOLDER)
+        storage.compress_data()
 
     def notify(self):
         notification.notify()
