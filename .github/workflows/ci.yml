@@ -1,0 +1,26 @@
+name: CI
+on:
+  schedule:
+    - cron: "0 8 1 4,10 *"
+  workflow_dispatch:
+jobs:
+  superhub-scraping:
+    name: Scrap supermarkets of Canary Islands
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - uses: BSFishy/pip-action@v1
+        with:
+          requirements: requirements.txt
+      - run: python main.py -vxn
+        env:
+          NOTIFICATION_FROM_ADDR: ${{ secrets.NOTIFICATION_FROM_ADDR }}
+          NOTIFICATION_TO_ADDRS: ${{ secrets.NOTIFICATION_TO_ADDRS }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
