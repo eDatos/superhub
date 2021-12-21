@@ -1,6 +1,8 @@
+import shutil
 from importlib import import_module
 
 import yaml
+from logzero import logger
 
 import settings
 
@@ -19,3 +21,8 @@ class Dispatcher:
         for slug in self.config:
             if (not filter) or (slug in filter):
                 self.scrap(slug)
+
+    def compress(self):
+        output_filepath = settings.ZIPDATA_FILEPATH
+        logger.info(f'Compressing output data -> {output_filepath}')
+        return shutil.make_archive(output_filepath.stem, 'zip', settings.DF_OUTPUT_FOLDER)

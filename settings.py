@@ -17,3 +17,5 @@ LOGFILE_BACKUP_COUNT = config('LOGFILE_BACKUP_COUNT', cast=int, default=3)
 REQUESTS_TIMEOUT = config('REQUESTS_TIMEOUT', default=5, cast=int)  # seconds
 REQUESTS_DELAY = config('REQUESTS_DELAY', default=3, cast=int)  # seconds
 REQUESTS_RETRIES = config('REQUESTS_RETRIES', default=3, cast=int)
+
+ZIPDATA_FILEPATH = config('ZIPDATA_FILEPATH', default=PROJECT_DIR / 'data.zip', cast=Path)

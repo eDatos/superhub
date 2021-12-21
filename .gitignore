@@ -6,3 +6,4 @@ sandbox.ipynb
 .ipynb_checkpoints
 /data
 *.log
+/data.zip
