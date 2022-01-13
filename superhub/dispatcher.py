@@ -18,7 +18,8 @@ class Dispatcher:
 
     def scrap_all(self, filter=[]):
         for slug in self.config:
-            if (not filter) or (slug in filter):
+            enabled = self.config[slug].get('enabled', True)
+            if enabled and (not filter or (slug in filter)):
                 self.scrap(slug)
 
     def compress(self):

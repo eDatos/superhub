@@ -23,7 +23,7 @@ def run(
         '--notify',
         '-n',
         show_default=False,
-        help='Notify compressed output data files.',
+        help='Notify output data files. --compress is implicit.',
     ),
 ):
     logger.setLevel(logzero.DEBUG if verbose else logzero.INFO)
