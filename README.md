@@ -44,3 +44,7 @@ A common usage would be just `python main.py -vn` which will scrap all "enabled"
 For each trade (supermarket chain) defined in [config.yml](config.yml) a **csv file** is generated within a `data` folder.
 
 Each file has different columns since it depends on the available data at the scraped website. Each row represents an establishment for the respective trade.
+
+## Changelog
+
+Check [features and bugfixes](CHANGELOG.md) for each release.
