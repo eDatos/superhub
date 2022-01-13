@@ -1,5 +1,4 @@
 *.pyc
-config.yml
 .DS_Store
 .env
 sandbox.ipynb

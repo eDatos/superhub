@@ -1,0 +1,117 @@
+alcampo: # TODO -> Creo que sólo hay 4 supermercados en Canarias. La web no va muy bien
+  url: https://www.alcampo.es/empresa/tiendas
+  enabled: false
+carrefour:
+  url: https://www.carrefour.es/tiendas-carrefour/buscador-de-tiendas/locations.aspx
+  target_field:
+    name: postal
+    values:
+      - 35
+      - 38
+corteingles:
+  url:
+    - https://www.elcorteingles.es/centroscomerciales/es/eci/santa-cruz-de-tenerife
+    - https://www.elcorteingles.es/centroscomerciales/es/eci/las-palmas
+lidl:
+  url: https://spatial.virtualearth.net/REST/v1/data/b5843d604cd14b9099f57cb23a363702/Filialdaten-ES/Filialdaten-ES?$select=*,__Distance&$top=201&$filter=Adresstyp%20Eq%201&key=AjhJAzQQN7zhpMcZcJinxel86P600c6JcsHsyNjlqpO7MhjrPO-lcpDGHF9jNZOw&$format=json&jsonp=Microsoft_Maps_Network_QueryAPI_8&spatialFilter=nearby({lat},{lon},{search_radius})
+  search_radius: 100
+  islands:
+    tenerife:
+      lat: 28.2922506
+      lon: -17.0831207
+    gran canaria:
+      lat: 27.957502
+      lon: -15.8766269
+    la palma:
+      lat: 28.6551008
+      lon: -18.0057893
+    la gomera:
+      lat: 28.1188289
+      lon: -17.3637769
+    el hierro:
+      lat: 27.7434674
+      lon: -18.1619293
+    lanzarote:
+      lat: 29.0393117
+      lon: -13.9308656
+    fuerteventura:
+      lat: 28.4001594
+      lon: -14.4463886
+    la graciosa:
+      lat: 29.2537206
+      lon: -13.545137
+mercadona:
+  url: https://www.mercadona.com/estaticos/cargas/data.js
+  json_response:
+    start: 60
+    end: -5
+  target_field:
+    name: cp
+    length: 5
+    values:
+      - 35
+      - 38
+spar:
+  url: https://spar.es/wp-admin/admin-ajax.php?lang=es&action=store_search&lat={lat}&lng={lon}&max_results={max_results}&search_radius={search_radius}
+  max_results: 100
+  search_radius: 100
+  islands:
+    tenerife:
+      lat: 28.2922506
+      lon: -17.0831207
+    gran canaria:
+      lat: 27.957502
+      lon: -15.8766269
+    la palma:
+      lat: 28.6551008
+      lon: -18.0057893
+    la gomera:
+      lat: 28.1188289
+      lon: -17.3637769
+    el hierro:
+      lat: 27.7434674
+      lon: -18.1619293
+    lanzarote:
+      lat: 29.0393117
+      lon: -13.9308656
+    fuerteventura:
+      lat: 28.4001594
+      lon: -14.4463886
+    la graciosa:
+      lat: 29.2537206
+      lon: -13.545137
+hiperdino:
+  url: https://www.hiperdino.es/c9504/tiendas/index/result/
+tu_trebol:
+  url: http://www.comercialjesuman.es/tu-trebol/
+  columns:
+    - name
+    - address
+    - phone
+tu_alteza:
+  url: http://www.comercialjesuman.es/supermercados-tu-alteza/
+la_hucha:
+  url: http://www.comercialjesuman.es/la-hucha-supermercados/
+  columns:
+    - name
+    - address
+    - phone
+unide:
+  url: https://web.unide.es/wp-content/plugins/pazzeys-store-locator/files/xmlmap.php?lat={lat}&lng={lon}&radius={radius}&es_unide=Unide%20Market&es_supermercadosUnide=Supermercados%20Unide&es_gama=Gama&es_maxcoop=Maxcoop&es_udaco=Udaco
+  lat: 28.4260613
+  lon: -18.0971522
+  radius: 1000
+coviran:
+  url: https://www.coviran.es/localizador
+  id_to_wait_for: activmap-places
+  location_input_id: activmap-location
+  place_class: activmap-place
+  pac_container_class: pac-container
+  pac_item_class: pac-item
+  columns:
+    - address
+    - place
+    - region
+  search_text: Canarias
+cinco_oceanos:
+  url: https://5oceanos.com/nuestras-tiendas-en-las-islas-canarias/
