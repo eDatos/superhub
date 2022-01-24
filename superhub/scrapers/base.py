@@ -17,6 +17,7 @@ class BaseScraper:
         logger.info(f'Building {slug.upper()} scraper')
         self.slug = slug
         self.config = config[slug]
+        df_output_folder.mkdir(parents=True, exist_ok=True)
         self.df_output_path = df_output_folder / (slug + '.csv')
         if use_webdriver:
             self.webdriver = utils.setup_webdriver()

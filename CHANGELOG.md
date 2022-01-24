@@ -6,6 +6,8 @@ Versions follow [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<pa
 
 Released XXXX-XX-XX
 
+- Fix minor bugs with output folder creation.
+
 ## Version 0.1.0
 
 Released 2021-01-13
